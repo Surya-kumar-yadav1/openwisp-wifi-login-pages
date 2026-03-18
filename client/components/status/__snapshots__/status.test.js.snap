@@ -197,7 +197,7 @@ exports[`<Status /> interactions should hide check if check.value is zero 1`] = 
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -340,7 +340,7 @@ exports[`<Status /> interactions should not display STATUS_CONTENT and radius us
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -564,7 +564,7 @@ exports[`<Status /> interactions should show user's radius usage 1`] = `
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -748,7 +748,7 @@ exports[`<Status /> interactions subscriptions: should hide checks and show upgr
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -976,7 +976,7 @@ exports[`<Status /> interactions subscriptions: should show upgrade option when 
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -1286,7 +1286,7 @@ exports[`<Status /> interactions subscriptions: should show upgrade option when 
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -1514,7 +1514,7 @@ exports[`<Status /> interactions subscriptions: should show upgrade option when 
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -1824,7 +1824,7 @@ exports[`<Status /> interactions subscriptions: should show upgrade option when 
     className="hidden"
     name="owisp-auth-logout-iframe"
     onLoad={[Function]}
-    title="owisp-auth-iframe"
+    title="owisp-auth-logout-iframe"
   />
 </Fragment>
 `;
@@ -1989,7 +1989,7 @@ exports[`<Status /> rendering should render correctly 1`] = `
       className="hidden"
       name="owisp-auth-logout-iframe"
       onLoad={[Function]}
-      title="owisp-auth-iframe"
+      title="owisp-auth-logout-iframe"
     />
   </React.Fragment>
 </React.Fragment>
@@ -2145,7 +2145,7 @@ exports[`<Status /> rendering with placeholder translation tags should render tr
       className="hidden"
       name="owisp-auth-logout-iframe"
       onLoad={[Function]}
-      title="owisp-auth-iframe"
+      title="owisp-auth-logout-iframe"
     />
   </React.Fragment>
 </React.Fragment>

@@ -1490,7 +1490,7 @@ export default class Status extends React.Component {
               ref={this.logoutIframeRef}
               name="owisp-auth-logout-iframe"
               className="hidden"
-              title="owisp-auth-iframe"
+              title="owisp-auth-logout-iframe"
             />
           </>
         )}
