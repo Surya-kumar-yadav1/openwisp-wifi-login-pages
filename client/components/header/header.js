@@ -61,210 +61,123 @@ export default class Header extends React.Component {
     ) : null;
   };
 
+  ///changes made here
   render() {
-    const {menu} = this.state;
-    const {
-      header,
-      languages,
-      language,
-      orgSlug,
-      setLanguage,
-      location,
-      isAuthenticated,
-      userData,
-    } = this.props;
-    const {logo, links, second_logo: secondLogo} = header;
-    const {pathname} = location;
-    const internalLinks = [`/${orgSlug}/login`, `/${orgSlug}/registration`];
-    return (
-      <>
-        <div className="header-container header-desktop">
-          <div className="header-row-1">
-            <div className="header-row-1-inner">
-              <div className="header-left">
-                <div className="header-logo-div">
-                  {logo && logo.url ? (
-                    <Link to={`/${orgSlug}`}>
-                      <img
-                        src={getAssetPath(orgSlug, logo.url)}
-                        alt={logo.alternate_text}
-                        className="header-logo-image header-desktop-logo-image"
-                      />
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
-
-              {secondLogo && (
-                <div className="header-logo-2">
-                  <img
-                    src={getAssetPath(orgSlug, secondLogo.url)}
-                    alt={secondLogo.alternate_text}
-                    className="header-logo-image header-desktop-logo-image"
-                  />
-                </div>
-              )}
-
-              <div className="header-right">
-                {languages.map((lang) => (
-                  <button
-                    type="button"
-                    className={`${
-                      language === lang.slug ? "active " : ""
-                    }header-language-btn header-desktop-language-btn header-language-btn-${
-                      lang.slug
-                    }`}
-                    key={lang.slug}
-                    onClick={() => setLanguage(lang.slug)}
-                  >
-                    {lang.text}
-                  </button>
-                ))}
+  const {menu} = this.state;
+  const {
+    header,
+    languages,
+    language,
+    orgSlug,
+    setLanguage,
+    location,
+    isAuthenticated,
+    userData,
+  } = this.props;
+  const {logo, links, second_logo: secondLogo} = header;
+  const {pathname} = location;
+  const internalLinks = [`/${orgSlug}/login`, `/${orgSlug}/registration`];
+  return (
+    <>
+      <div className="header-container">
+        <div className="header-row-1">
+          <div className="header-row-1-inner">
+            <div className="header-left">
+              <div className="header-logo-div">
+                {logo && logo.url ? (
+                  <Link to={`/${orgSlug}`}>
+                    <img
+                      src={getAssetPath(orgSlug, logo.url)}
+                      alt={logo.alternate_text}
+                      className="header-logo-image"
+                    />
+                  </Link>
+                ) : null}
               </div>
             </div>
-          </div>
-          <div className="header-row-2">
-            <div className="header-row-2-inner">
-              {links &&
-                links.map((link, index) => {
-                  if (!shouldLinkBeShown(link, isAuthenticated, userData)) {
-                    return null;
-                  }
-                  if (
-                    isInternalLink(link.url) &&
-                    (internalLinks.indexOf(link.url) < 0 || !isAuthenticated)
-                  ) {
-                    return (
-                      <Link
-                        className={`header-link header-desktop-link
-                  header-link-${index + 1} ${
-                    pathname === link.url.replace("{orgSlug}", orgSlug)
-                      ? "active"
-                      : ""
-                  } button `}
-                        to={link.url.replace("{orgSlug}", orgSlug)}
-                        key={index}
-                      >
-                        {getText(link.text, language)}
-                      </Link>
-                    );
-                  }
-                  return (
-                    <a
-                      href={link.url}
-                      className={`header-link header-desktop-link
-                    header-link-${index + 1} button`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      key={link.url}
-                    >
-                      {getText(link.text, language)}
-                    </a>
-                  );
-                })}
-            </div>
-          </div>
-        </div>
-        <div className="header-mobile ">
-          <div className="header-row-1">
-            <div className="header-row-1-inner">
-              <div className="header-left">
-                <div className="header-logo-div">
-                  {logo && logo.url ? (
-                    <Link to={`/${orgSlug}`}>
-                      <img
-                        src={getAssetPath(orgSlug, logo.url)}
-                        alt={logo.alternate_text}
-                        className="header-logo-image header-mobile-logo-image"
-                      />
-                    </Link>
-                  ) : null}
-                </div>
+            {secondLogo && (
+              <div className="header-logo-2">
+                <img
+                  src={getAssetPath(orgSlug, secondLogo.url)}
+                  alt={secondLogo.alternate_text}
+                  className="header-logo-image"
+                />
               </div>
-              {secondLogo && (
-                <div className="header-logo-2">
-                  <img
-                    src={getAssetPath(orgSlug, secondLogo.url)}
-                    alt={secondLogo.alternate_text}
-                    className="header-logo-image header-mobile-logo-image"
-                  />
-                </div>
-              )}
-              <div className="header-right">
-                <div
-                  role="button"
-                  tabIndex={0}
-                  className="header-hamburger"
-                  onClick={this.handleHamburger}
-                  onKeyUp={this.handleKeyUp}
-                  aria-label={getText({en: "Menu Button"}, language)}
-                >
-                  <div className={`${menu ? "rot45" : ""}`} />
-                  <div className={`${menu ? "rot-45" : ""}`} />
-                  <div className={`${menu ? "opacity-hidden" : ""}`} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className={`${menu ? "display-flex" : "display-none"} header-mobile-menu`}
-          >
-            {links &&
-              links.map((link, index) => {
-                if (shouldLinkBeShown(link, isAuthenticated, userData)) {
-                  if (isInternalLink(link.url)) {
-                    return (
-                      <Link
-                        className={`header-link mobile-link
-                    header-link-${index + 1} ${
-                      pathname === link.url.replace("{orgSlug}", orgSlug)
-                        ? "active"
-                        : ""
-                    } button`}
-                        to={link.url.replace("{orgSlug}", orgSlug)}
-                        key={index}
-                      >
-                        {getText(link.text, language)}
-                      </Link>
-                    );
-                  }
-                  return (
-                    <a
-                      href={link.url}
-                      className={`header-link mobile-link
-                      header-link-${index + 1} button`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      key={link.url}
-                    >
-                      {getText(link.text, language)}
-                    </a>
-                  );
-                }
-                return null;
-              })}
-            <div className="mobile-languages-row">
+            )}
+            <div className="header-right">
               {languages.map((lang) => (
                 <button
                   type="button"
                   className={`${
                     language === lang.slug ? "active " : ""
-                  }header-language-btn header-mobile-language-btn header-language-btn-${
-                    lang.slug
-                  }`}
+                  }header-language-btn header-language-btn-${lang.slug}`}
                   key={lang.slug}
                   onClick={() => setLanguage(lang.slug)}
                 >
                   {lang.text}
                 </button>
               ))}
+              <div
+                role="button"
+                tabIndex={0}
+                className="header-hamburger"
+                onClick={this.handleHamburger}
+                onKeyUp={this.handleKeyUp}
+                aria-label={getText({en: "Menu Button"}, language)}
+              >
+                <div className={`${menu ? "rot45" : ""}`} />
+                <div className={`${menu ? "rot-45" : ""}`} />
+                <div className={`${menu ? "opacity-hidden" : ""}`} />
+              </div>
             </div>
           </div>
         </div>
-        {this.getStickyMsg()}
-      </>
-    );
-  }
+        <div className={`header-row-2${menu ? " header-nav--open" : ""}`}>
+          <div className="header-row-2-inner">
+            {links &&
+              links.map((link, index) => {
+                if (!shouldLinkBeShown(link, isAuthenticated, userData)) {
+                  return null;
+                }
+                if (
+                  isInternalLink(link.url) &&
+                  (internalLinks.indexOf(link.url) < 0 || !isAuthenticated)
+                ) {
+                  return (
+                    <Link
+                      className={`header-link header-link-${index + 1} ${
+                        pathname === link.url.replace("{orgSlug}", orgSlug)
+                          ? "active"
+                          : ""
+                      } button`}
+                      to={link.url.replace("{orgSlug}", orgSlug)}
+                      key={index}
+                    >
+                      {getText(link.text, language)}
+                    </Link>
+                  );
+                }
+                return (
+                  <a
+                    href={link.url}
+                    className={`header-link header-link-${index + 1} button`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    key={link.url}
+                  >
+                    {getText(link.text, language)}
+                  </a>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+      {this.getStickyMsg()}
+    </>
+  );
+}
+  //to here
+
 }
 Header.defaultProps = {
   isAuthenticated: false,
