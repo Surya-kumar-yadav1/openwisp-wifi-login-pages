@@ -105,7 +105,8 @@ describe("<Header /> rendering", () => {
       },
     ];
     wrapper = shallow(<Header {...props} />);
-    expect(isInternalLink).toHaveBeenCalledTimes(6);
+    // After refactor: single tree renders links once instead of twice
+    expect(isInternalLink).toHaveBeenCalledTimes(3);
     expect(isInternalLink).toHaveBeenCalledWith("/default/login");
   });
   it("should render without authenticated links when not authenticated", () => {
@@ -151,27 +152,25 @@ describe("<Header /> rendering", () => {
     expect(linkText).not.toContain("link-4");
   });
   it("should render 2 links", () => {
-    expect(wrapper.find(".header-desktop-link")).toHaveLength(2);
+    // After refactor: single tree, use generic header-link class
+    expect(wrapper.find(".header-link")).toHaveLength(2);
   });
   it("should render 2 languages", () => {
-    expect(wrapper.find(".header-desktop-language-btn")).toHaveLength(2);
+    // After refactor: single set of language buttons
+    expect(wrapper.find(".header-language-btn")).toHaveLength(2);
   });
   it("should render english as default language", () => {
+    // After refactor: no desktop-specific class
     expect(
-      wrapper.find(
-        ".header-desktop-language-btn.header-language-btn-en.active",
-      ),
+      wrapper.find(".header-language-btn.header-language-btn-en.active"),
     ).toHaveLength(1);
     expect(
-      wrapper.find(
-        ".header-desktop-language-btn.header-language-btn-it.active",
-      ),
+      wrapper.find(".header-language-btn.header-language-btn-it.active"),
     ).toHaveLength(0);
   });
   it("should render logo", () => {
-    expect(
-      wrapper.find(".header-logo-image.header-desktop-logo-image"),
-    ).toHaveLength(1);
+    // After refactor: single logo, no desktop-specific class
+    expect(wrapper.find(".header-logo-image")).toHaveLength(1);
   });
   it("should not render logo", () => {
     const logo = {
@@ -182,9 +181,7 @@ describe("<Header /> rendering", () => {
     };
     props = createTestProps(logo);
     wrapper = shallow(<Header {...props} />);
-    expect(
-      wrapper.find(".header-logo-image.header-desktop-logo-image"),
-    ).toHaveLength(0);
+    expect(wrapper.find(".header-logo-image")).toHaveLength(0);
   });
   it("should render sticky msg and close it on clicking close-btn", () => {
     props = createTestProps({
@@ -207,7 +204,6 @@ describe("<Header /> rendering", () => {
     expect(wrapper.find(".close-sticky-btn").length).toEqual(1);
     expect(wrapper.instance().state.stickyMsg).toEqual(true);
     wrapper.find(".close-sticky-btn").simulate("click");
-    // sticky-msg closed
     expect(wrapper.instance().state.stickyMsg).toEqual(false);
     expect(wrapper.find(".sticky-container").length).toEqual(0);
     expect(wrapper.find(".sticky-msg").length).toEqual(0);
@@ -245,14 +241,9 @@ describe("<Header /> interactions", () => {
     wrapper = shallow(<Header {...props} />);
   });
   it("should call setLanguage function when 'language button' is clicked", () => {
-    wrapper
-      .find(".header-language-btn-it.header-desktop-language-btn")
-      .simulate("click");
+    // After refactor: single language button, no desktop/mobile separation
+    wrapper.find(".header-language-btn-it").simulate("click");
     expect(props.setLanguage).toHaveBeenCalledTimes(1);
-    wrapper
-      .find(".header-language-btn-it.header-mobile-language-btn")
-      .simulate("click");
-    expect(props.setLanguage).toHaveBeenCalledTimes(2);
   });
   it("should call handleHamburger function when 'hamburger button' is clicked", () => {
     wrapper.find(".header-hamburger").simulate("click");
